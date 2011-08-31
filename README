@@ -1,4 +1,4 @@
-r53.py is a simple commandline tool to help you manage your AWS Route 53 DNS records. It interfaces with AWS via boto: http://code.google.com/p/boto/ . It supports a workflow where a canonical zone file is managed via version control and pushed to AWS. This is different, but complementary to, https://github.com/barnybug/cli53 . We recommend these tools be used in concert. This tool was developed at foursquare.com, where we use it to manage our DNS.
+r53.py is a simple commandline tool to help you manage your AWS Route 53 DNS records. It interfaces with AWS via boto: http://code.google.com/p/boto/ . It supports a workflow where a canonical zone file is managed via version control and pushed to AWS. This is different, but complementary to, https://github.com/barnybug/cli53 . We recommend these tools be used in concert. This tool was developed at foursquare.com, where we use it to manage our DNS. It is offered under the MIT license.
 
 Features:
 - Maintains your own canonical version of your DNS configs under source control.
