@@ -164,6 +164,10 @@ def main():
     print "You must specify either --push or --pull."
     sys.exit(1)
 
+  # confirm wants stdin to itself
+  if args.push == '-':
+    args.confirm = True
+
   conn = Route53Connection()
 
   log.info('looking up zone for %s' % args.zone)
@@ -175,6 +179,8 @@ def main():
     print lxml.etree.tostring(live_config, pretty_print=True)
 
   if args.push:
+    if args.push == '-':
+        args.push = sys.stdin
     new_config = lxml.etree.parse(args.push)
     normalize_xml(live_config)
     normalize_xml(new_config.getroot())
