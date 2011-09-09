@@ -9,6 +9,10 @@ Requirements:
 boto: http://code.google.com/p/boto/
 lxml: http://lxml.de/
 
+Installation:
+Super easy!
+$ pip install r53
+
 Sample usage:
 $ r53.py --help
 usage: r53.py [-h] [--push file_to_push.xml] [--pull] [--confirm] [--verbose]
