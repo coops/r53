@@ -21,7 +21,7 @@ class ZoneNotFoundError(Exception):
 def lookup_zone(conn, zone):
   """Look up a zone ID for a zone string.
 
-  Args: conn: boto.route53.Route53Connection 
+  Args: conn: boto.route53.Route53Connection
         zone: string eg. foursquare.com
   Returns: zone ID eg. ZE2DYFZDWGSL4.
   Raises: ZoneNotFoundError if zone not found."""
@@ -144,7 +144,7 @@ def normalize_xml(xml):
   XSLT_STRIPSPACE(xml)
 
 
-if __name__ == '__main__':
+def main():
   parser = argparse.ArgumentParser(description='Push/pull Amazon Route 53 configs.')
   parser.add_argument('--push', metavar='file_to_push.xml', help="Push the config in this file to R53.")
   parser.add_argument('--pull', action='store_true', help="Dump current R53 config to stdout.")
@@ -164,6 +164,10 @@ if __name__ == '__main__':
     print "You must specify either --push or --pull."
     sys.exit(1)
 
+  # confirm wants stdin to itself
+  if args.push == '-':
+    args.confirm = True
+
   conn = Route53Connection()
 
   log.info('looking up zone for %s' % args.zone)
@@ -173,8 +177,10 @@ if __name__ == '__main__':
 
   if args.pull:
     print lxml.etree.tostring(live_config, pretty_print=True)
-  
+
   if args.push:
+    if args.push == '-':
+        args.push = sys.stdin
     new_config = lxml.etree.parse(args.push)
     normalize_xml(live_config)
     normalize_xml(new_config.getroot())
@@ -195,3 +201,5 @@ if __name__ == '__main__':
         sys.exit(0)
     conn.change_rrsets(zone_id, changesetstr)
 
+if __name__ == '__main__':
+    main()
