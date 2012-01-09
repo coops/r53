@@ -10,6 +10,7 @@ setup(
     version='0.1',
     description='Command line script to synchronize Amazon Route53 DNS data.',
     package_dir={'': 'src'},
+    packages=['r53'],
     install_requires=[
         'boto',
         'lxml',
