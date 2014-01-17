@@ -7,7 +7,7 @@ from setuptools import setup
 
 setup(
     name='r53',
-    version='0.3',
+    version='0.4',
     description='Command line script to synchronize Amazon Route53 DNS data.',
     package_dir={'': 'src'},
     packages=['r53'],
