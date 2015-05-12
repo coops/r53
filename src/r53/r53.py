@@ -196,6 +196,7 @@ def main():
   parser.add_argument('--push', metavar='file_to_push.xml', help="Push the config in this file to R53.")
   parser.add_argument('--pull', action='store_true', help="Dump current R53 config to stdout.")
   parser.add_argument('--confirm', action='store_true', help="Do not prompt before push.")
+  parser.add_argument('--dryrun', action='store_true', help="Do not actually apply changes.")
   parser.add_argument('--verbose', action='store_true')
   parser.add_argument('--zone', required=True, metavar="foursquare.com", help="Zone to push/pull.")
   args = parser.parse_args()
@@ -249,7 +250,11 @@ def main():
       if ans not in ['y', 'Y']:
         print "Confirmation failed; exiting"
         sys.exit(0)
-    conn.change_rrsets(zone_id, changesetstr)
+    if args.dryrun:
+      print "Dry run mode: exiting without applying changes"
+      sys.exit(0)
+    else:
+      conn.change_rrsets(zone_id, changesetstr)
 
 if __name__ == '__main__':
     main()
