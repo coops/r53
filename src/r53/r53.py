@@ -11,7 +11,7 @@ import lxml.etree
 from boto.route53 import Route53Connection
 from boto.exception import BotoServerError
 
-R53_API_VERSION = '2012-12-12'
+R53_API_VERSION = '2013-04-01'
 R53_XMLNS = 'https://route53.amazonaws.com/doc/%s/' % R53_API_VERSION
 XSLT_STRIPSPACE = lxml.etree.XSLT(lxml.etree.XML('''<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:strip-space elements="*"/></xsl:stylesheet>'''))
 
